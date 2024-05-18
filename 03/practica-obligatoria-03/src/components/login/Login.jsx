@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Login = () => {
-  const [contains, setContains] = useState("");
+  const [username, serUsername] = useState("");
   const [alertShown, setAlertShown] = useState(false);
 
   const verifyContent = (cadena) => {
@@ -15,25 +15,25 @@ const Login = () => {
   };
 
   const handleChangeInput = (event) => {
-    setContains(event.target.value);
+    serUsername(event.target.value);
 
     verifyContent(event.target.value);
 
-    if (alertShown === true) {
+    if (alertShown) {
       alert("Nombres sin o porfavor!");
     }
   };
 
   const handleClick = () => {
-    verifyContent(contains);
+    verifyContent(username);
 
-    if (contains == "") {
+    if (username.trim() === "") {
       alert("Ingrese al menos una letra");
     } else if (!alertShown) {
       alert("Te registraste correctamente!");
     }
 
-    if (alertShown === true) {
+    if (alertShown) {
       alert("No podes registrarte con una O en tu Username");
     }
   };
@@ -56,7 +56,7 @@ const Login = () => {
               placeholder="Nombre de usuario"
               onChange={handleChangeInput}
             />
-            <p className="flex justify-center text-black">{contains}</p>
+            <p className="flex justify-center text-black">{username}</p>
           </div>
           <div className="flex mb-6">
             <input type="checkbox" />
